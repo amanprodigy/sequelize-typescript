@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+        "lib": ["es2016", "es2017.object" ],
+        "sourceMap": true,
+        "strictNullChecks": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "module": "commonjs",
+        "target": "es6",
+        "allowJs": true,
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "outDir": "out",
+        "types": ["node", "mocha"],
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "noUnusedLocals": true,
+        "allowJs": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "out/**/*",
+        "test/**/*",
+        "test/*",
+        "__tests__/**/*"
+    ],
+    "include": [
+        "*.ts",
+        "src/**/*"
+    ],
+    "paths": {
+        "@app/*": ["./*"]
+    }
+}
