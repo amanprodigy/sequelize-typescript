@@ -4,20 +4,26 @@ import {
   Column,
   Model,
   Length,
+  Unique,
   AutoIncrement
 } from "sequelize-typescript";
 
 @Table
-export class Tweet extends Model<Tweet> {
+export class User extends Model<User> {
 
   @AutoIncrement
   @Length({ max: 11 })
   @PrimaryKey
   @Column({ allowNull: false })
-  id: number;
+  id!: number;
 
-  @Length({ max: 300 })
+  @Unique
+  @Length({ max: 35 })
   @Column({ allowNull: false })
-  content!: string;
+  email!: string;
+
+  @Length({ max: 20 })
+  @Column({ allowNull: false })
+  password!: string;
 
 }

@@ -29,7 +29,10 @@
         "baseUrl": "./src",
         "paths": {
             "@app/*": ["*"],
-            "@db/*": ["db/*"]
+            "@controllers/*": ["controllers/*"],
+            "@db/*": ["db/*"],
+            "@dao/*": ["dao/*"],
+            "@routes/*": ["routes/*"]
         }
     },
     "exclude": [
