@@ -1,0 +1,3 @@
+https://www.youtube.com/watch?v=pxo7L5nd1gA
+https://github.com/ahmerb/typescript-sequelize-example
+https://github.com/maximegris/typescript-express-sequelize

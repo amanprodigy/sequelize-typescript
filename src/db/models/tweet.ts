@@ -5,11 +5,11 @@ export class Tweet extends Model<Tweet> {
 
   @Length({ max: 11 })
   @PrimaryKey
-  @Column
+  @Column({allowNull: false})
   id: number;
 
   @Length({ max: 300 })
-  @Column
+  @Column({allowNull: false})
   content!: string;
 
 }

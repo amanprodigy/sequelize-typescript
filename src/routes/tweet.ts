@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 import { Router, Request, Response, NextFunction } from "express";
-import { Tweet } from "../db/models/tweet";
+import { Tweet } from "@db/models/tweet";
 
 export const tweetRouter = Router();
 

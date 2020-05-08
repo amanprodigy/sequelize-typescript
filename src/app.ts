@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import express, { Request, Response, Application, NextFunction } from 'express';
 
-import { tweetRouter } from './routes/tweet';
+import { tweetRouter } from '@app/routes/tweet';
 
 export const app: Application = express();
 

@@ -2,10 +2,11 @@
 
 import { Sequelize } from "sequelize-typescript";
 
-import { Tweet } from "./models/tweet";
+import { Tweet } from "@db/models/tweet";
+const dbConfig = require("@db/config/database");
 
 const env = process.env.NODE_ENV || "development";
-const config = require(__dirname + "/config/database.json")[env];
+const config = dbConfig[env];
 
 export const sequelize = new Sequelize(
   config.database,
@@ -18,7 +19,7 @@ sequelize.addModels([Tweet]);
 
 const populateDb = async () => {
   console.log("Populating the db...");
-  Tweet.sync();
+  await sequelize.sync({force: true})
 };
 
 populateDb();
