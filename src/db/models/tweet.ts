@@ -2,22 +2,35 @@ import {
   Table,
   PrimaryKey,
   Column,
-  Model,
   Length,
-  AutoIncrement
+  DataType,
+  BelongsTo
 } from "sequelize-typescript";
 
-@Table
-export class Tweet extends Model<Tweet> {
+import { BaseModel } from "@db/models/base"
+import User from "@db/models/User";
 
-  @AutoIncrement
-  @Length({ max: 11 })
+@Table({
+  tableName: "tweets",
+  paranoid: true
+})
+export default class Tweet extends BaseModel<Tweet> {
   @PrimaryKey
-  @Column({ allowNull: false })
-  id: number;
+  @Column({
+    allowNull: false,
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4
+  })
+  id!: string;
 
-  @Length({ max: 300 })
-  @Column({ allowNull: false })
+  @Length({ min: 2, max: 300 })
+  @Column({ allowNull: false, type: DataType.TEXT })
   content!: string;
 
+  // Add ForeignKey 'authorId' relating this tweet with its author
+  @BelongsTo(() => User, "authorId")
+  author!: User;
 }
+
+// We could also do this to make association
+// Tweet.belongsTo(User, { foreignKey: "authorId" });

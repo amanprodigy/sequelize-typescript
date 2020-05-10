@@ -1,6 +1,5 @@
 import bodyParser from 'body-parser';
 import express, { Request, Response, Application, NextFunction } from 'express';
-import errorhandler from 'strong-error-handler';
 import boom from 'express-boom';
 
 import { tweetRouter } from '@app/routes/tweet';
@@ -17,7 +16,7 @@ app.use(bodyParser.json({limit: '5mb'}));
 // middleware for error reporting
 app.use(boom());
 
-// enable corse for all origins
+// enable cors for all origins
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Expose-Headers", "x-total-count");
@@ -27,13 +26,15 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/tweets', tweetRouter);
-app.use('/users', userRouter);
+app.use('/api/', tweetRouter);
+app.use('/api/', userRouter);
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
-  res.send('Welcome to Tweets API');
+  res.send('Welcome to Tweet Social Network');
+})
+app.get('/api', (req: Request, res: Response, next: NextFunction) => {
+  res.status(200).json({ message: 'Tweet API Home' });
 })
 
-app.use(errorhandler({
-  debug: process.env.ENV !== 'prod',
-  log: true,
-}));
+app.use(function (req, res) {
+  res.boom.notFound(); // Responds with a 404 status code
+});

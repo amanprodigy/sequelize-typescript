@@ -1,10 +1,9 @@
-import { sequelize } from '@db/models/index';
-import { app } from '@app/app';
+import { app } from "@app/app";
+import { sequelize } from "@db/models/index";
 
 app.listen(8000, () => {
   console.log("Server is running at 8000");
 });
-
 
 const testConnection = async () => {
   try {
@@ -13,6 +12,6 @@ const testConnection = async () => {
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
-};
+}
 
-testConnection();
+testConnection()

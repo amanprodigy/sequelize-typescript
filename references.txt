@@ -3,3 +3,4 @@ https://github.com/ahmerb/typescript-sequelize-example
 https://github.com/maximegris/typescript-express-sequelize
 https://github.com/MichalZalecki/sequelize-with-typescript-example
 https://itnext.io/overcoming-sequelize-hiccups-24e916ebb4c4
+https://medium.com/@erickwendel/generic-repository-with-typescript-and-node-js-731c10a1b98e

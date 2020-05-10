@@ -1,29 +1,33 @@
+// https://sequelize.org/v5/manual/models-definition.html#configuration
+const defineOptions = {
+  // Soft delete off
+  paranoid: false,
+};
+
 module.exports = {
   development: {
-    username: 'aman',
-    password: 'asdf',
-    database: 'socialnetwork',
-    host: '127.0.0.1',
+    username: "aman",
+    password: "asdf",
+    database: "socialnetwork",
+    host: "127.0.0.1",
     port: 3306,
-    dialect: 'mysql',
+    dialect: "mysql",
     dialectOptions: {
       bigNumberStrings: true
     },
-    "define": {
-        "freezeTableName": false,
-        "timestamps": true
-    }
+    define: defineOptions
   },
   test: {
     username: process.env.CI_DB_USERNAME,
     password: process.env.CI_DB_PASSWORD,
     database: process.env.CI_DB_NAME,
-    host: '127.0.0.1',
+    host: "127.0.0.1",
     port: 3306,
-    dialect: 'mysql',
+    dialect: "mysql",
     dialectOptions: {
       bigNumberStrings: true
-    }
+    },
+    define: defineOptions
   },
   production: {
     username: process.env.PROD_DB_USERNAME,
@@ -31,12 +35,13 @@ module.exports = {
     database: process.env.PROD_DB_NAME,
     host: process.env.PROD_DB_HOSTNAME,
     port: process.env.PROD_DB_PORT,
-    dialect: 'mysql',
+    dialect: "mysql",
     dialectOptions: {
-      bigNumberStrings: true,
+      bigNumberStrings: true
       //ssl: {
       //  ca: fs.readFileSync(__dirname + '/mysql-ca-master.crt')
       //}
-    }
+    },
+    define: defineOptions
   }
 };

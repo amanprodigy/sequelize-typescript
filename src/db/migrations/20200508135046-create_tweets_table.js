@@ -2,26 +2,34 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable("Tweets", {
+    queryInterface.createTable("tweets", {
       id: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         primaryKey: true,
-        autoIncrement: true,
+        defaultvalue: Sequelize.UUIDV4,
+        allowNull: false
       },
       content: {
         allowNull: false,
         type: Sequelize.STRING(300)
       },
-      createdAt: {
+      authorId: {
+        allowNull: false,
+        type: Sequelize.UUID
+      },
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      deleted_at: {
         allowNull: false,
         type: Sequelize.DATE
       }
     }),
 
-  down: (queryInterface, Sequelize) => queryInterface.dropTable("Tweets")
+  down: (queryInterface, Sequelize) => queryInterface.dropTable("tweets")
 };
