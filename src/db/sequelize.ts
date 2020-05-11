@@ -1,11 +1,12 @@
 "use strict";
 
 import { Sequelize } from "sequelize-typescript";
+const Umzug = require("umzug");
 
 import Tweet from "@db/models/tweet";
 import User from "@db/models/user";
 import UserFollower from "@db/models/UserFollower";
-import bootstrap from '@app/bootstrap';
+import bootstrap from "@app/bootstrap";
 
 const dbConfig = require("@db/config/database");
 const env = process.env.NODE_ENV || "development";
@@ -20,16 +21,30 @@ export const sequelize = new Sequelize(
 
 sequelize.addModels([Tweet, User, UserFollower]);
 
-const syncAndPopulateDb = async () => {
-
-  try {
-    console.log("Syncing db ...");
-    await sequelize.sync({ force: true })
-    console.log("Sync db successful")
-  } catch(err){
-    console.error("Unable to sync db: ", err);
-    throw(err);
+const uz = new Umzug({
+  migrations: {
+    path: __dirname + "/migrations",
+    params: [sequelize.getQueryInterface(), Sequelize]
+  },
+  storage: "sequelize",
+  storageOptions: {
+    sequelize: sequelize
   }
+});
+
+const syncAndPopulateDb = async () => {
+  try {
+    await sequelize.drop();
+  } catch (err) {
+    throw err;
+  }
+
+  /* Checks migrations and run them if they are not already applied. To keep
+   * track of the executed migrations, a table (and sequelize model) called
+   * SequelizeMeta will be automatically created (if it doesn't exist already)
+   * and parsed.
+   * */
+  await uz.up();
 
   try {
     console.log("Bootstrapping db ... ");
@@ -38,7 +53,6 @@ const syncAndPopulateDb = async () => {
   } catch (error) {
     console.error("Unable to bootstrap db: ", error);
   }
-
-}
+};
 
 syncAndPopulateDb();

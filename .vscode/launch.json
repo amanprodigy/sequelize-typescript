@@ -8,11 +8,13 @@
             "type": "node",
             "request": "launch",
             "name": "nodemon",
+            "preLaunchTask": "tsc: build - tsconfig.json",
             "runtimeExecutable": "nodemon",
             "program": "${workspaceFolder}/out/index.js",
             "restart": true,
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
+            "env": {"BUILD_ENV": "development"},
             "skipFiles": [
                 "<node_internals>/**"
             ]

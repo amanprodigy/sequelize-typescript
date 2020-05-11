@@ -1,5 +1,5 @@
 import { app } from "@app/app";
-import { sequelize } from "@db/models/index";
+import { sequelize } from "@db/sequelize";
 
 app.listen(8000, () => {
   console.log("Server is running at 8000");

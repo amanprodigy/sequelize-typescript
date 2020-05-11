@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import express, { Request, Response, Application, NextFunction } from 'express';
 import boom from 'express-boom';
+import morgan from 'morgan';
 
 import { tweetRouter } from '@app/routes/tweet';
 import { userRouter } from '@app/routes/user';
@@ -15,6 +16,9 @@ app.use(bodyParser.json({limit: '5mb'}));
 
 // middleware for error reporting
 app.use(boom());
+
+// middleware for HTTP request logging
+app.use(morgan('combined'))
 
 // enable cors for all origins
 app.use((req, res, next) => {

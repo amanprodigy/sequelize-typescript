@@ -30,7 +30,7 @@ const bootstrap = async (): Promise<void> => {
     littleDao.tweet("Bored in home");
 
   } catch (err) {
-    console.error(err);
+    throw(err)
   }
 };
 

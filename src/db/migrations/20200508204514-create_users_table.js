@@ -1,7 +1,9 @@
 "use strict";
 
+const { Sequelize } = require('sequelize');
+
 module.exports = {
-  up: (queryInterface, Sequelize) =>
+  up: (queryInterface) =>
     queryInterface.createTable("users", {
       id: {
         type: Sequelize.UUID,
@@ -29,10 +31,10 @@ module.exports = {
         type: Sequelize.DATE
       },
       deleted_at: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       }
     }),
 
-  down: (queryInterface, Sequelize) => queryInterface.dropTable("users")
+  down: (queryInterface) => queryInterface.dropTable("users")
 };
