@@ -18,3 +18,10 @@ RUN npm install
 COPY ./start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
+
+# entrypoint app
+COPY ./entrypoint /entrypoint
+RUN sed -i 's/\r$//g' /entrypoint
+RUN chmod +x /entrypoint
+
+ENTRYPOINT ["/entrypoint"]
