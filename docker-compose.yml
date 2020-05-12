@@ -1,0 +1,39 @@
+version: '3'
+
+volumes:
+  database_mysql_data: {}
+
+networks:
+  database_mysql_network:
+    driver: bridge
+
+services: 
+  database:
+    image: mysql:latest
+    restart: always
+    container_name: database
+    volumes:
+      - database_mysql_data:/var/lib/mysql
+    env_file:
+      - ./.envs/.development
+    networks:
+      - database_mysql_network
+    ports:
+      - 3306:3306
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: backend
+    depends_on: 
+      - database
+    env_file: 
+      - ./.envs/.development
+    volumes:
+      - ./:/app/
+    ports:
+      - 8000:8000
+    networks:
+      - database_mysql_network
+    command: /start

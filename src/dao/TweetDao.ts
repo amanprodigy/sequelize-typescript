@@ -1,5 +1,5 @@
-import Tweet from "@db/models/Tweet";
-import User from "@db/models/User";
+import Tweet from "@db/models/tweet";
+import User from "@db/models/user";
 
 export default class TweetDao {
   public static findByPk = (id: string): Promise<Tweet> => Tweet.findByPk(id);

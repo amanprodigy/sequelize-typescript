@@ -12,7 +12,7 @@ import {
 } from "sequelize-typescript";
 
 import BaseModel from "@db/models/BaseModel";
-import Tweet from "@db/models/Tweet";
+import Tweet from "@db/models/tweet";
 
 const SALT_ROUNDS = 10;
 
