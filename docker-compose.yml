@@ -32,6 +32,7 @@ services:
       - ./.envs/.development
     volumes:
       - ./:/app/
+      - /app/node_modules
     ports:
       - 8000:8000
     networks:

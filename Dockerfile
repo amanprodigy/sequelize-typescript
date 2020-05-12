@@ -7,6 +7,9 @@ WORKDIR /app
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
+# add package.json and package-lock.json
+COPY package*.json ./
+
 # install and cache app dependencies
 RUN npm install -g typescript
 RUN npm install
@@ -15,6 +18,3 @@ RUN npm install
 COPY ./start /start
 RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
-
-# add app
-COPY . /app/
