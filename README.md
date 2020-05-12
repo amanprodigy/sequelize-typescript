@@ -18,3 +18,10 @@
 # Few tips:
 1. To create db through sequelize-cli run ``npm run db:create``
 2. To migrate db `npm run db:migrate`
+
+# Using docker
+1. To build ``docker-compose build`` 
+2. To run ``docker-compose up`` 
+3. To create db through sequelize-cli run ``docker-compose run --rm backend npm run db:create``
+4. To migrate db `docker-compose run --rm backend npm run db:migrate`
+

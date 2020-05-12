@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ -z "${MYSQL_ROOT_PASSWORD}" ]; then
+    base_postgres_image_default_user='admin'
+    export MYSQL_ROOT_PASSWORD="${base_postgres_image_default_user}"
+fi
+
+export DATABASE_URL="mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}"
+
+mysql_read() {
+node << END
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('$DATABASE_URL');
+sequelize.authenticate().then(() => process.exit(0)).catch(err => process.exit(-1));
+END
+}
+
+
+until mysql_read; do
+  >&2 echo "Waiting for MYSQL to become available..."
+  sleep 1
+done
+
+>&2 echo "MYSQL is available."
+exec "$@"
