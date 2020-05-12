@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import User from "@db/models/user";
-import Tweet from "@db/models/tweet";
+import User from "@app/db/models/User";
+import Tweet from "@app/db/models/Tweet";
 import UserFollower from "@db/models/UserFollower";
 import UserFollowerDao from "@app/dao/UserFollowerDao";
 import TweetDao from "@app/dao/TweetDao";
