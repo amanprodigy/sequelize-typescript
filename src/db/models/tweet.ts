@@ -7,7 +7,7 @@ import {
   BelongsTo
 } from "sequelize-typescript";
 
-import { BaseModel } from "@db/models/base"
+import BaseModel from "@db/models/BaseModel";
 import User from "@db/models/User";
 
 @Table({
@@ -28,7 +28,7 @@ export default class Tweet extends BaseModel<Tweet> {
   content!: string;
 
   // Add ForeignKey 'authorId' relating this tweet with its author
-  @BelongsTo(() => User, "authorId")
+  @BelongsTo(() => User, "author_id")
   author!: User;
 }
 

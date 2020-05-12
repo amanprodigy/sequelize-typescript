@@ -7,7 +7,7 @@ import {
 } from "sequelize-typescript";
 
 @Table({ paranoid: true, underscored: true})
-export class BaseModel<T> extends Model<T> {
+export default class BaseModel<T> extends Model<T> {
   @CreatedAt
   created_at: Date
 

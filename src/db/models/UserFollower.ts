@@ -1,12 +1,7 @@
-import {
-  ForeignKey,
-  Table,
-  Column,
-  DataType,
-} from "sequelize-typescript";
+import { ForeignKey, Table, Column, DataType } from "sequelize-typescript";
 
 import User from "@db/models/User";
-import { BaseModel } from "@db/models/base";
+import BaseModel from "@db/models/BaseModel";
 
 @Table({
   tableName: "user_follower",
@@ -18,7 +13,6 @@ export default class UserFollower extends BaseModel<UserFollower> {
     type: DataType.UUID,
     field: "user_id",
     allowNull: false,
-    defaultValue: DataType.UUIDV4,
     unique: "userIdFollowerId",
     comment: "User id of the user who is getting followed"
   })

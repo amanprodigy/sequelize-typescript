@@ -3,8 +3,7 @@ import express, { Request, Response, Application, NextFunction } from 'express';
 import boom from 'express-boom';
 import morgan from 'morgan';
 
-import { tweetRouter } from '@app/routes/tweet';
-import { userRouter } from '@app/routes/user';
+import { tweetRouter, authRouter, userRouter} from '@app/routes/_index';
 
 export const app: Application = express();
 
@@ -32,6 +31,7 @@ app.use((req, res, next) => {
 
 app.use('/api/', tweetRouter);
 app.use('/api/', userRouter);
+app.use('/api/', authRouter);
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send('Welcome to Tweet Social Network');
 })

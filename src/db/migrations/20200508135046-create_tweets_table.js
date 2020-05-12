@@ -15,9 +15,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(300)
       },
-      authorId: {
+      author_id: {
         allowNull: false,
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
       },
       created_at: {
         allowNull: false,

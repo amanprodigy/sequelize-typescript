@@ -1,9 +1,13 @@
-import User from "@db/models/user";
-import Tweet from "@db/models/tweet";
-import UserFollower from "@db/models/UserFollower";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
+import User from "@db/models/User";
+import Tweet from "@db/models/Tweet";
+import UserFollower from "@db/models/UserFollower";
 import UserFollowerDao from "@app/dao/UserFollowerDao";
 import TweetDao from "@app/dao/TweetDao";
+
+const SECRET_KEY = process.env.SECRET_KEY || "Aw3s0m3";
 
 export default class UserDao {
   instance: User;
@@ -15,8 +19,11 @@ export default class UserDao {
   /* Finds a user by its primary key */
   public static findByPk = (id: any): Promise<User> => User.findByPk(id);
 
-  /* Finds all users within the db 
-  * @param: void */
+  /* Finds a user by matching certain conditions */
+  public static findOne = (args: any): Promise<User> => User.findOne(args);
+
+  /* Finds all users within the db
+   * @param: void */
   public static findAll = (): Promise<User[]> => User.findAll();
 
   /* Creates a user given the email and password */
@@ -30,5 +37,25 @@ export default class UserDao {
     UserFollowerDao.create(whom, this);
 
   public tweet = (content: string): Promise<Tweet> =>
-    TweetDao.create({ content: content, user: this.instance });
+    TweetDao.create({ content: content, author: this.instance });
+
+  public static isValidCredentials = async (
+    user: User,
+    email: string,
+    password: string
+  ): Promise<boolean> =>
+    user.email.toUpperCase() === email.toUpperCase() &&
+    (await bcrypt.compare(password, user.password));
+
+  public static generateJsonWebToken = (
+    email: string,
+    password: string
+  ): string =>
+    jwt.sign(
+      {
+        data: `${email}-${password}`
+      },
+      SECRET_KEY,
+      { expiresIn: "1h" }
+    );
 }
