@@ -28,12 +28,12 @@
                 "ts-node/register"
             ],
             "args": [
-                "${workspaceFolder}/src/index.ts"
+                "${workspaceFolder}/backend/src/index.ts"
             ],
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/src/index.ts"
+            "program": "${workspaceFolder}/backend/src/index.ts"
         }
     ]
 }

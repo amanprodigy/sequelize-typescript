@@ -11,7 +11,7 @@ import {
   BeforeSave
 } from "sequelize-typescript";
 
-import Tweet from "@db/models/Tweet";
+import Tweet from "@db/models/tweet";
 import { BaseModel } from "@db/models/base";
 
 const SALT_ROUNDS = 10;

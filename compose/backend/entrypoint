@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ -z "${MYSQL_ROOT_PASSWORD}" ]; then
+    base_postgres_image_default_user='admin'
+    export MYSQL_ROOT_PASSWORD="${base_postgres_image_default_user}"
+fi
+
+export DATABASE_URL="mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DATABASE}"
+
+until PGPASSWORD=$MYSQL_ROOT_PASSWORD mysqladmin ping -h "$MYSQL_HOST" -uroot -c '\q'; do
+  >&2 echo "Waiting for MYSQL to become available..."
+  sleep 1
+done
+
+>&2 echo "MYSQL is available."
+exec $cmd

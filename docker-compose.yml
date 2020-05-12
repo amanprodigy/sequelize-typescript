@@ -12,14 +12,33 @@ services:
     build: 
       context: .
       dockerfile: ./compose/database/Dockerfile
-    image: sequelize_local_database
+    image: sequelize_development_database
     restart: always
     container_name: database
     volumes:
       - database_mysql_data:/var/lib/mysql
     env_file:
-      - ./.envs/.local/.database
+      - ./.envs/.development/.database
     networks:
       - database_mysql_network
     ports:
-      - 3389:3306
+      - 3306:3306
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./compose/backend/Dockerfile
+    image: sequelize_development_backend
+    container_name: backend
+    depends_on: 
+      - database
+    volumes:
+      - ./backend:/app
+    env_file: 
+      - ./.envs/.development/.database
+      - ./.envs/.development/.backend
+    ports:
+      - 8000:8000
+    networks:
+      - database_mysql_network
+    command: /start

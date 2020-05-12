@@ -5,7 +5,7 @@ import {
   DataType,
 } from "sequelize-typescript";
 
-import User from "@db/models/User";
+import User from "@db/models/user";
 import { BaseModel } from "@db/models/base";
 
 @Table({
