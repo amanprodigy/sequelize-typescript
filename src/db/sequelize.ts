@@ -3,8 +3,8 @@
 import { Sequelize } from "sequelize-typescript";
 const Umzug = require("umzug");
 
-import Tweet from "@app/db/models/Tweet";
-import User from "@app/db/models/User";
+import Tweet from "@db/models/Tweet";
+import User from "@db/models/User";
 import UserFollower from "@db/models/UserFollower";
 import bootstrap from "@app/bootstrap";
 

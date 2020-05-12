@@ -8,7 +8,7 @@ import {
 } from "sequelize-typescript";
 
 import BaseModel from "@db/models/BaseModel";
-import User from "@app/db/models/User";
+import User from "@db/models/User";
 
 @Table({
   tableName: "tweets",
