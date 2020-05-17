@@ -5,15 +5,16 @@ import BaseModel from "@db/models/BaseModel";
 
 @Table({
   tableName: "user_follower",
-  paranoid: true
+  paranoid: true,
+  indexes: [{
+    unique: true, fields: ['followerId', 'followedId']
+  }]
 })
 export default class UserFollower extends BaseModel<UserFollower> {
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
-    field: "user_id",
     allowNull: false,
-    unique: "userIdFollowerId",
     comment: "User id of the user who is getting followed"
   })
   userId!: string;
@@ -21,9 +22,7 @@ export default class UserFollower extends BaseModel<UserFollower> {
   @ForeignKey(() => User)
   @Column({
     type: DataType.UUID,
-    field: "follower_id",
     allowNull: false,
-    unique: "userIdFollowerId",
     comment: "User id of the users who are following"
   })
   followerId!: string;

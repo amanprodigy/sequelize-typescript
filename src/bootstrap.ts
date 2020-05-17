@@ -22,6 +22,7 @@ const bootstrap = async (): Promise<void> => {
     await amanDao.follow(richaDao);
     await amanDao.follow(littleDao);
     await richaDao.follow(littleDao);
+    await richaDao.follow(amanDao);
 
     amanDao.tweet("Nice vacation");
     amanDao.tweet("Rocking with NodeJS");
